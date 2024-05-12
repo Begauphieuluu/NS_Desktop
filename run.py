@@ -3,15 +3,15 @@ import subprocess
 import shutil
 
 CRD_SSH_Code = input("Google CRD SSH Code :")
-username = "nsxnhat"
-password = "nhat"
+username = "nx" #@param {type:"string"}
+password = "minh" #@param {type:"string"}
 os.system(f"useradd -m {username}")
 os.system(f"adduser {username} sudo")
 os.system(f"echo '{username}:{password}' | sudo chpasswd")
 os.system("sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd")
 
-Pin = 123456
-Autostart = True
+Pin = 123456 #@param {type: "integer"}
+Autostart = True #@param {type: "boolean"}
 
 class CRDSetup:
     def __init__(self, user):
@@ -46,6 +46,11 @@ class CRDSetup:
         subprocess.run(["dpkg", "--install", "google-chrome-stable_current_amd64.deb"])
         subprocess.run(['apt', 'install', '--assume-yes', '--fix-broken'])
         print("Google Chrome Installed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    
+    @staticmethod
+    def installTelegram():
+        subprocess.run(["apt", "install", "--assume-yes", "telegram-desktop"])
+        print("Telegram Installed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     @staticmethod
     def changewall():
@@ -61,6 +66,20 @@ class CRDSetup:
         os.system(f"sudo curl -s -L -o /etc/alternatives/desktop-theme/wallpaper/contents/images/3840x2160.svg https://gitlab.com/chamod12/gcrd_deb_codesandbox.io_rdp/-/raw/main/walls/3840x2160.svg")
         os.system(f"sudo curl -s -L -o /etc/alternatives/desktop-theme/wallpaper/contents/images/5120x2880.svg https://gitlab.com/chamod12/gcrd_deb_codesandbox.io_rdp/-/raw/main/walls/5120x2880.svg")
         print("Wallpaper Changed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+   
+    @staticmethod
+    def installQbit():
+        subprocess.run(["sudo", "apt", "update"])
+        subprocess.run(["sudo", "apt", "install", "-y", "qbittorrent"])
+        print("Qbittorrent Installed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
+    @staticmethod
+    def finish(user):
+        if Autostart:
+            os.makedirs(f"/home/{user}/.config/autostart", exist_ok=True)
+            link = "www.youtube.com/@The_Disala"
+            colab_autostart = """[Desktop Entry]
+            print("Finalizing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 Type=Application
 Name=Colab
@@ -78,19 +97,22 @@ X-GNOME-Autostart-enabled=true""".format(link)
         os.system(f"su - {user} -c '{command}'")
         os.system("service chrome-remote-desktop start")
         
-        print("╔═══                                                         ═══╗")
-        print("║                           ███╗   ██╗ ██████╗                  ║")
-        print("                            ████╗  ██║██╔════╝                   ")
-        print("                            ██╔██╗ ██║╚█████╗                    ")
-        print("                            ██║╚██╗██║ ╚═══██╗                   ")
-        print("                            ██║ ╚████║██████╔╝                   ")
-        print("                            ╚═╝  ╚═══╝╚═════╝                    ")
-        print("         > [TM] Made by NSdev                                    ")
-        print(" ║                                                              ║")
-        print(" ╚═══                                                        ═══╝")
+        print(" ..........................................................")
+        print(" .....Brought By The Disala................................")
+        print(" ..........................................................")
+        print(" ......#####...######...####....####...##.......####.......")
+        print(" ......##..##....##....##......##..##..##......##..##......")
+        print(" ......##..##....##.....####...######..##......######......")
+        print(" ......##..##....##........##..##..##..##......##..##......")
+        print(" ......#####...######...####...##..##..######..##..##......")
+        print(" ..........................................................")
+        print(" ......... Telegram Channel - https://t.me/TheDisala4U ....")
+        print(" ..........................................................")
+        print(" ..Youtube Channel - https://www.youtube.com/@The_Disala ..")
+        print(" ..........................................................")
         print("Log in PIN : 123456") 
-        print("User Name : nsxnhat") 
-        print("User Pass : nhat") 
+        print("User Name : user") 
+        print("User Pass : root") 
         while True:
             pass
 
